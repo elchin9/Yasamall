@@ -1,0 +1,23 @@
+﻿
+@{
+    @model IEnumerable<Brands>
+    Layout = null;
+}
+
+@foreach (var b in Model)
+{
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+        <a asp-controller="Entertainment" asp-action="Details" asp-route-id="@b.Id">
+            <div class="store-content">
+                <div class="content-image">
+                    <img src="~/img/@b.PhotoURL" alt="">
+                </div>
+                <div class="content-info">
+                    <h4>@b.Name</h4>
+                    <p>@b.Floor.Name mərtəbə</p>
+                    <p>@b.Phone</p>
+                </div>
+            </div>
+        </a>
+    </div>
+}

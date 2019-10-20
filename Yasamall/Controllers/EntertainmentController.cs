@@ -1,0 +1,481 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Yasamall.DAL;
+using Yasamall.Extensions;
+using Yasamall.Models;
+using Yasamall.ViewModel;
+
+namespace Yasamall.Controllers
+{
+    public class EntertainmentController : Controller
+    {
+        private readonly Db_Yasamall _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IHostingEnvironment _env;
+
+        public EntertainmentController(Db_Yasamall context,
+                                       IHostingEnvironment env,
+                                       UserManager<AppUser> userManager)
+        {
+            _context = context;
+            _env = env;
+            _userManager = userManager;
+        }
+
+        public IActionResult Index()
+        {
+            ViewBag.Active = "Entertainment";
+
+            BrandViewModel viewModel = new BrandViewModel()
+            {
+                Brands = _context.Brands.Where(b => b.CategoryId == 3 && b.IsActive == true).OrderByDescending(b => b.Id).Take(8),
+                Tags = _context.Tags.Where(b => b.CategoryId == 3)
+            };
+
+            ViewBag.TotalCount = _context.Brands.Where(b => b.CategoryId == 3).Count();
+            ViewBag.CategoryId = 3;
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return View("Error");
+
+            Brands brand = await _context.Brands.FindAsync(id);
+
+            if (brand == null) return View("Error");
+
+            if (brand.IsActive == false) return View("Error");
+
+
+            ViewBag.Active = "Entertainment";
+
+            AppUser user = await _userManager.FindByIdAsync(brand.User.Id);
+
+
+            ProTags viewModel = new ProTags()
+            {
+                Brand = brand,
+                BrandTags = _context.BrandTags.Where(b => b.BrandId == brand.Id),
+                User = user,
+                Products = brand.Products.OrderByDescending(b => b.Id).Take(8)
+            };
+
+            ViewBag.TotalCount = _context.Products.Where(b => b.BrandsId == brand.Id).Count();
+
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> EntertainmentProduct(int? id)
+        {
+            if (id == null) return View("Error");
+
+            Products product = await _context.Products.FindAsync(id);
+
+            if (product == null) return View("Error");
+
+            ViewBag.Active = "Entertainment";
+
+            FilmViewModel viewModel = new FilmViewModel()
+            {
+                Product = product,
+                AllProducts = _context.Products.Where(p => p.BrandsId == product.BrandsId),
+            };
+
+
+            return View(viewModel);
+        }
+
+        [ActionName("Edit")]
+        public IActionResult Edit(int? id)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            Brands brand = _context.Brands.Find(id);
+
+            if (User.Identity.Name != brand.User.UserName)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            if (id == null) return View("Error");
+
+            ViewBag.Floor = _context.Floor;
+            ViewBag.User = _userManager.Users;
+            ViewBag.Tag = _context.Tags.Where(t => t.CategoryId == 3);
+
+            ICollection<int?> myTagsId = new List<int?>();
+           
+
+            foreach (var t in _context.BrandTags.Where(b => b.BrandId == brand.Id))
+            {
+                myTagsId.Add(t.TagsId);
+            }
+
+            brand.TagsId = myTagsId;
+
+            return View(brand);
+        }
+
+        [ActionName("Edit")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPost(Brands brand)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Xaiş olunur düzgün doldurun.");
+                ViewBag.Floor = _context.Floor;
+                ViewBag.User = _userManager.Users;
+                ViewBag.Tag = _context.Tags.Where(t => t.CategoryId == 3);
+
+                return View(brand);
+            }
+
+            Brands newBrand = await _context.Brands.FindAsync(brand.Id);
+
+            if (newBrand == null) return View("Error");
+
+            if (brand.Photo != null)
+            {
+                string computerPhoto = Path.Combine(_env.WebRootPath, "img", newBrand.PhotoURL);
+
+                if (System.IO.File.Exists(computerPhoto))
+                {
+                    System.IO.File.Delete(computerPhoto);
+                }
+
+                string filename = await brand.Photo.SaveAsync(_env.WebRootPath);
+                brand.PhotoURL = filename;
+                newBrand.PhotoURL = brand.PhotoURL;
+            }
+
+            if (brand.OnePagePhoto != null)
+            {
+                string computerPhoto = Path.Combine(_env.WebRootPath, "img", newBrand.OnePagePhotoURL);
+
+                if (System.IO.File.Exists(computerPhoto))
+                {
+                    System.IO.File.Delete(computerPhoto);
+                }
+
+                string filename = await brand.OnePagePhoto.SaveAsync(_env.WebRootPath);
+                brand.OnePagePhotoURL = filename;
+                newBrand.OnePagePhotoURL = brand.OnePagePhotoURL;
+                newBrand.OnePageInfo = brand.OnePageInfo;
+            }
+
+            IEnumerable<BrandTags> oldTags = _context.BrandTags.Where(p => p.BrandId == newBrand.Id);
+
+            if (brand.TagsId != null)
+            {
+                _context.BrandTags.RemoveRange(oldTags);
+
+                foreach (var c in brand.TagsId)
+                {
+                    BrandTags brandTags = new BrandTags()
+                    {
+                        BrandId = newBrand.Id,
+                        TagsId = c
+                    };
+
+                    await _context.BrandTags.AddAsync(brandTags);
+
+                }
+            }
+
+            newBrand.Name = brand.Name;
+            newBrand.Phone = brand.Phone;
+            newBrand.InstagramLink = brand.InstagramLink;
+            newBrand.FacebookLink = brand.FacebookLink;
+            newBrand.FloorId = brand.FloorId;
+            newBrand.Website = brand.Website;
+            newBrand.UserId = brand.UserId;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateProduct(int? id)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            Brands brand = _context.Brands.Find(id);
+
+            if (User.Identity.Name != brand.User.UserName)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+            ViewBag.Active = "Home";
+
+            ViewBag.Brand = _context.Brands.Where(b => b.Id == id);
+            ViewBag.Hall = _context.Halls;
+            ViewBag.Film = _context.Brands.FirstOrDefault(b => b.Id == id).IsFilm;
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProduct(Products product)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Active = "Home";
+                ViewBag.Hall = _context.Halls;
+                ViewBag.Film = _context.Brands.FirstOrDefault(b => b.Id == product.BrandsId).IsFilm;
+                ViewBag.Brand = _context.Brands.Where(b => b.Id == product.BrandsId);
+
+                return View(product);
+            }
+
+            if (product.AllPhotos == null)
+            {
+                ViewBag.Active = "Home";
+                ViewBag.Hall = _context.Halls;
+                ViewBag.Film = _context.Brands.FirstOrDefault(b => b.Id == product.BrandsId).IsFilm;
+                ViewBag.Brand = _context.Brands.Where(b => b.Id == product.BrandsId);
+
+                ModelState.AddModelError("AllPhotos", "Xahiş olunur şəkil əlavə edin.");
+
+                return View(product);
+            }
+
+
+            Products myProduct = new Products()
+            {
+                Name = product.Name,
+                Info = product.Info,
+                Price = product.Price,
+                BrandsId = product.BrandsId,
+            };
+
+            await _context.Products.AddAsync(myProduct);
+
+            if (product.HallsId != null)
+            {
+                myProduct.HallsId = product.HallsId;
+            }
+
+            bool isMain = true;
+
+            foreach (var p in product.AllPhotos)
+            {
+                if (p != null)
+                {
+                    if (p.ContentType.Contains("image/"))
+                    {
+                        string filename = await p.SaveAsync(_env.WebRootPath);
+
+                        ProductPhoto img = new ProductPhoto()
+                        {
+                            ProductsId = myProduct.Id,
+                            PhotoURL = filename
+                        };
+
+                        if (isMain == true)
+                        {
+                            img.IsMain = true;
+                        }
+                        isMain = false;
+
+                        await _context.ProductPhoto.AddAsync(img);
+                    }
+                }
+            }
+
+            Brands brand = await _context.Brands.FindAsync(myProduct.BrandsId);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = brand.Id });
+        }
+
+        public IActionResult ProductEdit(int? id)
+        {
+            if (id == null) return View("Error");
+
+            Products product = _context.Products.Find(id);
+
+            if (product == null) return View("Error");
+
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            Brands brand = _context.Brands.Find(product.BrandsId);
+
+            if (User.Identity.Name != brand.User.UserName)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            ViewBag.Hall = _context.Halls;
+
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductEdit(Products product)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Hall = _context.Halls;
+
+                ModelState.AddModelError("", "Xaiş olunur düzgün doldurun.");
+                return View(product);
+            }
+
+            Products newProduct = await _context.Products.FindAsync(product.Id);
+
+            Brands brand = await _context.Brands.FindAsync(newProduct.BrandsId);
+
+            if (newProduct == null) return View("Error");
+
+            if (product.AllPhotos != null)
+            {
+
+                IEnumerable<ProductPhoto> myPhoto = newProduct.Photos.Where(b => b.ProductsId == newProduct.Id);
+
+
+                foreach (var photo in myPhoto)
+                {
+                    string computerPhoto = Path.Combine(_env.WebRootPath, "img", photo.PhotoURL);
+
+                    if (System.IO.File.Exists(computerPhoto))
+                    {
+                        System.IO.File.Delete(computerPhoto);
+                    }
+
+                    _context.RemoveRange(myPhoto);
+                }
+
+                bool isMain = true;
+
+                foreach (var p in product.AllPhotos)
+                {
+                    if (p != null)
+                    {
+                        if (p.ContentType.Contains("image/"))
+                        {
+                            string filename = await p.SaveAsync(_env.WebRootPath);
+
+                            ProductPhoto img = new ProductPhoto()
+                            {
+                                ProductsId = newProduct.Id,
+                                PhotoURL = filename
+                            };
+
+                            if (isMain == true)
+                            {
+                                img.IsMain = true;
+                            }
+                            isMain = false;
+
+                            await _context.ProductPhoto.AddAsync(img);
+                        }
+                    }
+                }
+            }
+
+            newProduct.Name = product.Name;
+            newProduct.Info = product.Info;
+            newProduct.Price = product.Price;
+            newProduct.HallsId = product.HallsId;
+
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = brand.Id });
+        }
+
+
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteGet(int? id)
+        {
+            if (id == null) return View("Error");
+
+            Products product = await _context.Products.FindAsync(id);
+
+            if (product == null) return View("Error");
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            Brands brand = _context.Brands.Find(product.BrandsId);
+
+            if (User.Identity.Name != brand.User.UserName)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+
+
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(int? id)
+        {
+            IEnumerable<NewProducts> newProducts = _context.NewProducts.Where(p => p.ProductsId == id);
+
+            _context.NewProducts.RemoveRange(newProducts);
+
+            Products product = await _context.Products.FindAsync(id);
+
+            IEnumerable<ProductPhoto> myPhoto = product.Photos.Where(b => b.ProductsId == product.Id);
+
+
+            foreach (var photo in myPhoto)
+            {
+                string computerPhoto = Path.Combine(_env.WebRootPath, "img", photo.PhotoURL);
+
+                if (System.IO.File.Exists(computerPhoto))
+                {
+                    System.IO.File.Delete(computerPhoto);
+                }
+                _context.RemoveRange(myPhoto);
+
+            }
+
+            IEnumerable<ProductPhoto> productPhotos = _context.ProductPhoto.Where(p => p.ProductsId == id);
+
+            _context.ProductPhoto.RemoveRange(productPhotos);
+
+            Brands brand = await _context.Brands.FindAsync(product.BrandsId);
+
+            _context.Products.Remove(product);
+
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction("Details", new { id = brand.Id });
+        }
+    }
+}

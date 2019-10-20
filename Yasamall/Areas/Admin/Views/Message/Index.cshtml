@@ -1,0 +1,55 @@
+﻿
+@{
+    @model IEnumerable<MailBox>
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Mesajlar</h3>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <h5>Toplam Mesaj sayı : @Model.Count()</h5>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Email</th>
+                        <th>Göndərildiyi vaxt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model)
+                    {
+                        <tr>
+                            <td>
+                                <p>@b.Firstname</p>
+                            </td>
+                            <td>
+                                <p>@b.Email </p>
+                            </td>
+                            <td>
+                                <p>@String.Format("{0:yyyy-MM-dd}", b.Time)</p>
+                            </td>
+                            <td style="vertical-align: middle; text-align: center; color:white;">
+                                <a title="Ətraflı bax" asp-action="Details" asp-route-id="@b.Id" class="btn btn-success mt-1"><i class="fal fa-info"></i></a>
+                                <a title="Sil" asp-action="Delete" asp-route-id="@b.Id" class="btn btn-danger mt-1"><i class="fal fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+

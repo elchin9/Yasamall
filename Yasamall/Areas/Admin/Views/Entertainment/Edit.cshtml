@@ -1,0 +1,134 @@
+﻿
+@{
+    @model Brands
+    ViewData["Title"] = "Edit";
+}
+
+
+<!-- Start Contact Section -->
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Əyləncə Mərkəzində düzəliş et</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <form method="post" class="mt-4" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <label asp-for="Photo">Əyləncə Mərkəzinin Şəklini dəyişin</label>
+                                <div class="uploadArea">
+                                    <div class="uploadImage d-flex justify-content-center align-items-center">
+                                        <i class="fal fa-cloud-upload"></i>
+                                    </div>
+                                </div>
+                                <input id="uploadInput" asp-for="Photo" accept="image/*" class="form-control" />
+                                <span asp-validation-for="Photo" class="text-danger"></span>
+                            </div>
+
+                            @if (Model.IsOnePage)
+                            {
+                                <div class="form-group">
+                                    <label asp-for="OnePagePhoto">Məlumat Şəklini seçin</label>
+                                    <div class="uploadArea">
+                                        <div class="uploadImageThird d-flex justify-content-center align-items-center">
+                                            <i class="fal fa-cloud-upload"></i>
+                                        </div>
+                                    </div>
+                                    <input class="uploadInputThird form-control" asp-for="OnePagePhoto" accept="image/*" />
+                                    <span asp-validation-for="OnePagePhoto" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="OnePageInfo">Haqqında</label>
+                                    <input asp-for="OnePageInfo" class="form-control" />
+                                    <span asp-validation-for="OnePageInfo" class="text-danger"></span>
+                                </div>
+                            }
+
+
+
+                            <div class="form-group">
+                                <label asp-for="FloorId">Mərtəbə</label>
+                                <select asp-for="FloorId" asp-items="@(new SelectList(ViewBag.Floor,"Id","Name"))" style="width:100%; padding: 10px;"></select>
+                                <span asp-validation-for="FloorId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="UserId">Admin</label>
+                                <select asp-for="UserId" asp-items="@(new SelectList(ViewBag.User,"Id","UserName"))" style="width:100%; padding: 10px;"></select>
+                                <span asp-validation-for="UserId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TagsId">Kateqoriya</label>
+                                <select asp-for="TagsId" asp-items="@(new SelectList(ViewBag.Tag,"Id","Name"))" multiple style="width:100%; padding: 10px;"></select>
+                                <span asp-validation-for="TagsId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Name">Ad</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Phone">Telefon</label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FacebookLink">Facebook</label>
+                                <input asp-for="FacebookLink" class="form-control" />
+                                <span asp-validation-for="FacebookLink" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="InstagramLink">İnstagram</label>
+                                <input asp-for="InstagramLink" class="form-control" />
+                                <span asp-validation-for="InstagramLink" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Website">Sayt</label>
+                                <input asp-for="Website" class="form-control" />
+                                <span asp-validation-for="Website" class="text-danger"></span>
+                            </div>
+
+
+                            <input type="submit" class="btn-create" value="Dəyiş" />
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div>
+                            <p>Hazırki şəkil</p>
+                        </div>
+                        <div>
+                            <img style="width:100%;" src="~/img/@Model.PhotoURL" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- End Contact Section -->
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+

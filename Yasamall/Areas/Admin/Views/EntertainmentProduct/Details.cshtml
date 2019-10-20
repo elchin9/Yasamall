@@ -1,0 +1,73 @@
+﻿
+@{
+    @model Products
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <!-- Start One Product Section -->
+                @if (Model.Brands.IsFilm)
+                {
+                    <section id="oneFilm">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="one-image">
+                                        <img src="~/img/@Model.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="main-product-info">
+                                        <h4>@Model.Name</h4>
+                                        <p>
+                                            @Model.Info
+                                        </p>
+                                    </div>
+                                    <div class="main-product-hall">
+                                        <p>Zal :</p>
+                                        <span>@Model.Hall.Name</span>
+                                    </div>
+                                    <div class="main-product-price">
+                                        <span>@Model.Price</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                }
+                else
+                {
+                    <section id="oneFilm">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="one-image">
+                                        <img src="~/img/@Model.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="main-product-info">
+                                        <h4>@Model.Name</h4>
+                                        <p>
+                                            @Model.Info
+                                        </p>
+                                    </div>
+                                    <div class="main-product-price">
+                                        <span>@Model.Price</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                }
+
+                <!-- End One Product Section -->
+            </div>
+        </div>
+    </div>
+</div>
+

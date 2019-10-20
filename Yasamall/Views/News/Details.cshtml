@@ -1,0 +1,95 @@
+﻿
+@{
+    @model NewsViewModel
+    ViewData["Title"] = "Details";
+}
+
+
+
+<!-- Start Slide Section -->
+
+<section id="news-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3"></div>
+            <div class="col-12 col-md-6">
+                <div class="news-details-img">
+                    <i class="fas fa-angle-left arrow-left position-absolute"></i>
+                    <div class="window">
+                        <ul class="d-flex slider-lent">
+                            @foreach (var p in Model.News.Photos)
+                            {
+                                <li>
+                                    <img src="~/img/@p.PhotoURL">
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <i class="fas fa-angle-right arrow-right position-absolute"></i>
+                </div>
+            </div>
+            <div class="col-12 col-md-3"></div>
+            <div class="col-12">
+                <div class="news-details-info">
+                    <h4>@Model.News.Title</h4>
+                    <p>
+                        @Model.News.MainInfo
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 mt-5">
+                <span>@String.Format("{0:yyyy-MM-dd}", Model.News.Time)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Slide Section -->
+<!-- Start News Section -->
+
+<section id="news-wrapper">
+    <div class="container">
+        @if (Model.AllNews.Count() > 0)
+        {
+            <div class="row">
+                <div class="col-12">
+                    <h4>@Model.News.Brand.Name ilə bağlı digər xəbərlər :</h4>
+                </div>
+            </div>
+            <div class="row mt-3">
+                @foreach (var n in Model.AllNews)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+                        <a asp-route-id="@n.Id">
+                            <div class="last-content">
+                                <div class="last-images">
+                                    <img src="~/img/@n.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                    <div class="img-info">
+                                        <p>@n.Brand.Name</p>
+                                    </div>
+                                </div>
+                                <div class="last-info">
+                                    <h4>@n.Title</h4>
+                                    <span>@String.Format("{0:yyyy-MM-dd}", n.Time)</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+            @if (Model.AllNews.Count() >= 4)
+            {
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <div class="btn-more">
+                            <a asp-controller="News" asp-action="Index">Daha Çox</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</section>
+
+<!-- End News Section -->

@@ -1,0 +1,44 @@
+﻿
+@{
+    @model Brands
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <section class="wrapper" style="padding-bottom:50px;">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="nd-image">
+                                <img src="~/img/@Model.PhotoURL" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h3>@Model.Name</h3>
+                            <p class="mt-3">@Model.Phone</p>
+                            <p>@Model.Floor.Name mərtəbə</p>
+                            <a class="mt-3" href="@Model.InstagramLink">@Model.InstagramLink</a>
+                            <a href="@Model.FacebookLink">@Model.FacebookLink</a>
+                            <a href="@Model.Website">@Model.Website</a>
+                            <div>
+                                <a asp-controller="RestaurantProduct" asp-action="Index" asp-route-id="@Model.Id" class="product-admin-panel">Məhsullara bax</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nd-content">
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <a class="btn btn-danger mt-5" asp-action="Index">Əsas Səhifəyə qayıt</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

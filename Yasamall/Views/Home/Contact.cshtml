@@ -1,0 +1,75 @@
+﻿
+@{
+    @model MailBox
+    ViewData["Title"] = "Contact";
+}
+
+
+<!-- Start Contact Section -->
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="heading-contact">
+                    <h2>Əlaqə</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 col-lg-6">
+                <div class="form-message">
+                    <div class="heading-form">
+                        <h4>Təklif və iradlarınız üçün mesaj yazın.</h4>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Firstname"></label>
+                            <input asp-for="Firstname" />
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Lastname"></label>
+                            <input asp-for="Lastname" />
+                            <span asp-validation-for="Lastname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="TextBody">Mesajınız</label>
+                            <textarea rows="7" style="width:100%;" asp-for="TextBody"></textarea>
+                            <span asp-validation-for="TextBody" class="text-danger"></span>
+                        </div>
+
+                        <div class="btn-div">
+                            <input style="margin-top: 30px;" type="submit" class="btn-message" value="Göndər" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="contact-details">
+                    <div class="heading-form">
+                        <h4>Əlaqə məlumatları :</h4>
+                    </div>
+                    @await Component.InvokeAsync("Contact")
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Contact Section -->
+
+
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

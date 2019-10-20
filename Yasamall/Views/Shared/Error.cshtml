@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca|Lexend+Mega&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+
+    <!-- Preloader -->
+
+    <div class="loader-wrapper">
+        <img src="/img/loader.gif" alt="">
+    </div>
+
+    <!-- End PreLoader -->
+
+    <section id="error-404">
+        <div class="planet-img">
+            <img src="~/img/planet2.png" alt="">
+        </div>
+        <div class="rocket-img">
+            <img src="~/img/rocket.png" alt="">
+        </div>
+        <div class="cosmonaut-img">
+            <img src="~/img/cosmonaut.png" alt="">
+        </div>
+        <div class="error-info">
+            <h2>404</h2>
+            <p>Kosmosda itmiş kimi görünürsən</p>
+            <a asp-controller="Home" asp-action="Index">Əsas Səhifə</a>
+        </div>
+    </section>
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <script src="~/js/icons.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/js/main.js"></script>
+</body>
+
+</html>

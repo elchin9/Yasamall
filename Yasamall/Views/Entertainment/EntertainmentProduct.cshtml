@@ -1,0 +1,102 @@
+﻿
+@{
+    @model FilmViewModel
+    ViewData["Title"] = "Products";
+}
+
+
+
+<!-- Start One Product Section -->
+@if (Model.Product.Brands.IsFilm)
+{
+    <section id="oneFilm">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="one-image">
+                        <img src="~/img/@Model.Product.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="main-product-info">
+                        <h4>@Model.Product.Name</h4>
+                        <p>
+                            @Model.Product.Info
+                        </p>
+                    </div>
+                    <div class="main-product-hall">
+                        <p>Zal :</p>
+                        <span>@Model.Product.Hall.Name</span>
+                    </div>
+                    <div class="main-product-price">
+                        <span>@Model.Product.Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <section id="oneFilm">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="one-image">
+                        <img src="~/img/@Model.Product.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="main-product-info">
+                        <h4>@Model.Product.Name</h4>
+                        <p>
+                            @Model.Product.Info
+                        </p>
+                    </div>
+                    <div class="main-product-price">
+                        <span>@Model.Product.Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- End One Product Section -->
+<!-- Start Products Section -->
+
+<section id="products-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="store-tags d-flex align-items-center justify-content-between flex-wrap">
+                    <h4>Brendin digər məhsulları :</h4>
+                    <div class="btn-more">
+                        <a asp-controller="Shop" asp-action="ShopDetails" asp-route-id="@Model.Product.Brands.Id">Daha Çox</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            @foreach (var p in Model.AllProducts)
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a asp-controller="Entertainment" asp-action="Details" asp-route-id="@p.Id">
+                        <div class="product-shop-content">
+                            <div class="product-shop-image">
+                                <img src="~/img/@p.Photos.FirstOrDefault(pr => pr.IsMain == true).PhotoURL" alt="">
+                            </div>
+                            <div class="product-shop-info">
+                                <h5>@p.Name</h5>
+                                <p>$@p.Price</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- End Product Section -->

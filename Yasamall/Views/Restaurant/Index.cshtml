@@ -1,0 +1,59 @@
+﻿@{
+    @model BrandViewModel
+}
+
+<!-- Start Main-İmage Section -->
+
+<input type="hidden" id="restaurantDetails" value="@ViewBag.TotalCount" />
+<input type="hidden" id="restaurantCategoryId" value="@ViewBag.CategoryId" />
+
+
+<section id="main-image-restaurants">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="heading-main-image">
+                    <h4>Restoranlar</h4>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <div class="form-group">
+                    <label for="category">Kateqoriya üzrə axtarış</label>
+                    <select id="category" class="restaurantCategory">
+                        <option value="0">Hamısı</option>
+                        @foreach (var t in Model.Tags)
+                        {
+                            <option value="@t.Id">@t.Name</option>
+                        }
+                    </select>
+                    <i class="fad fa-angle-double-down"></i>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+        </div>
+    </div>
+</section>
+
+<!-- End Main İmage Section -->
+<!-- Start Store Section -->
+
+<section id="restaurants">
+    <div class="container">
+        <div class="row restaurantRow">
+            <partial name="_RestaurantPartialView" model="Model.Brands" />
+        </div>
+        @if (ViewBag.TotalCount > 8)
+        {
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="btn-more btn-restaurant">
+                        <a href="#">Daha Çox</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- End Store Section -->

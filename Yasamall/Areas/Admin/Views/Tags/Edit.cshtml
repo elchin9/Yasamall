@@ -1,0 +1,40 @@
+﻿
+@{
+    @model Tags
+    ViewData["Title"] = "Edit";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Dəyişiklik et</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-2"></div>
+                    <div class="col-12 col-md-8">
+                        <form method="post" class="mt-4" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="Name">Ad</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <input type="submit" class="btn-create" value="Dəyiş" />
+                            <a style="padding:10px 20px; background: #830808; color:white; margin-top: 30px;border-radius:20px; text-align:center;" asp-controller="Tags" asp-action="Index">Geri Qayıt</a>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

@@ -1,0 +1,72 @@
+﻿
+@{
+    @model ProfileViewModel
+    ViewData["Title"] = "MyProfile";
+}
+
+<section id="userProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-right">
+                <div class="btn btn-primary">
+                    <a asp-controller="Account" asp-action="EditProfile" asp-route-id="@Model.User.Id" style="color:white;">
+                        <i class="fal fa-cog"></i>
+                    Profili tənzimlə</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 ">
+                @if (Model.User.PhotoURL == null)
+                {
+                    <div class="user-image">
+                        <img src="~/img/Person-icon.png" alt="">
+                    </div>
+                }
+                else
+                {
+                    <div class="user-image">
+                        <img src="~/img/@Model.User.PhotoURL" alt="">
+                    </div>
+                }
+                <div class="user-name mt-3">
+                    <p>@Model.User.Firstname @Model.User.Lastname</p>
+                    <span class="d-block">Phone : @Model.User.PhoneNumber</span>
+                    <span class="d-block">Email : @Model.User.Email</span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="pages-menu mt-5">
+                    <div class="menu-header-page">
+                        <h4>Idarə etdiyim səhifələr</h4>
+                    </div>
+                    <ul class="text-center">
+                        @foreach (var b in Model.Brand)
+                        {
+                            if (b.CategoryId == 1)
+                            {
+                                <li>
+                                    <a asp-controller="Shop" asp-action="ShopDetails" asp-route-id="@b.Id">@b.Name</a>
+                                </li>
+                            }
+                            if (b.CategoryId == 2)
+                            {
+                                <li>
+                                    <a asp-controller="Restaurant" asp-action="RestaurantDetails" asp-route-id="@b.Id">@b.Name</a>
+                                </li>
+                            }
+                            if (b.CategoryId == 3)
+                            {
+                                <li>
+                                    <a asp-controller="Entertainment" asp-action="Details" asp-route-id="@b.Id">@b.Name</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

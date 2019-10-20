@@ -1,0 +1,53 @@
+﻿
+@{
+    @model News
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <section class="wrapper" style="padding-bottom:50px;">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-6 news-wrapper-slider">
+                            <div class="news-details-img">
+                                <i class="fas fa-angle-left arrow-left position-absolute"></i>
+                                <div class="window">
+                                    <ul class="d-flex slider-lent">
+                                        @foreach (var p in Model.Photos)
+                                        {
+                                            <li>
+                                                <img src="~/img/@p.PhotoURL">
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <i class="fas fa-angle-right arrow-right position-absolute"></i>
+                            </div>
+                        </div>
+                        <div class="col-3"></div>
+                        
+                        <div class="col-12 mt-4">
+                            <h3>@Model.Title</h3>
+                            <p class="mt-5">@Model.ShortInfo</p>
+                            <p>@Model.MainInfo</p>
+                            <p>@Model.Time</p>
+                        </div>
+                    </div>
+                    <div class="nd-content">
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <a class="btn btn-danger mt-5" asp-action="Index">Əsas Səhifəyə qayıt</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

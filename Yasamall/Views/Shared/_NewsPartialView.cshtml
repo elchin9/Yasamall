@@ -1,0 +1,25 @@
+﻿
+@{
+    @model IEnumerable<News>
+    Layout = null;
+}
+
+@foreach (var n in Model)
+{
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+        <a asp-action="Details" asp-route-id="@n.Id">
+            <div class="last-content">
+                <div class="last-images">
+                    <img src="img/@n.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                    <div class="img-info">
+                        <p>@n.Brand.Name</p>
+                    </div>
+                </div>
+                <div class="last-info">
+                    <h4>@n.Title</h4>
+                    <span>@String.Format("{0:yyyy-MM-dd}", n.Time)</span>
+                </div>
+            </div>
+        </a>
+    </div>
+}

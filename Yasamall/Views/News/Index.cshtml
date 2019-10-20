@@ -1,0 +1,46 @@
+﻿
+@{
+    @model IEnumerable<News>
+    ViewData["Title"] = "News";
+}
+
+
+
+<!-- Start Slide Section -->
+
+<input type="hidden" id="news-hidden-input" value="@ViewBag.TotalCount" />
+
+<section id="news-slide">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center ">
+                <div class="news-main-info">
+                    <h4>Blog</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End Slide Section -->
+<!-- Start News Section -->
+
+<section id="news-wrapper">
+    <div class="container">
+        <div class="row newsRow mt-3">
+            <partial name="_NewsPartialView" model="Model" />
+        </div>
+        @if (ViewBag.TotalCount > 16)
+        {
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="btn-more btn-news">
+                        <a href="#">Daha Çox</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- End News Section -->

@@ -1,0 +1,49 @@
+﻿
+@{
+    @model AppUser
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <section class="wrapper" style="padding-bottom:50px;">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            @if (Model.PhotoURL == null)
+                            {
+                            <div class="nd-image">
+                                <img src="~/img/Person-icon.png" />
+                            </div>
+                            }
+                            else
+                            {
+                            <div class="nd-image">
+                                <img src="~/img/@Model.PhotoURL" />
+                            </div>
+                            }
+                        </div>
+                        <div class="col-12 col-md-6  mt-5">
+                            <h3>Username : @Model.UserName </h3>
+                            <p class="mt-3">Soyad : @Model.Lastname</p>
+                            <p>Ad : @Model.Firstname</p>
+                            <p>Telefon : @Model.PhoneNumber</p>
+                            <p>Email : @Model.Email</p>
+                        </div>
+                    </div>
+                    <div class="nd-content">
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <a class="btn btn-danger mt-5" asp-action="Index">Əsas Səhifəyə qayıt</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

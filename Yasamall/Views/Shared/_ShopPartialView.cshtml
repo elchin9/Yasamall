@@ -1,0 +1,24 @@
+﻿
+@{
+    @model IEnumerable<Brands>
+    ViewData["Title"] = "_ShopPartialView";
+}
+
+@foreach (var s in Model)
+{
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+        <a asp-controller="Shop" asp-action="ShopDetails" asp-route-id="@s.Id">
+            <div class="store-content">
+                <div class="content-image">
+                    <img src="img/@s.PhotoURL" alt="">
+                </div>
+                <div class="content-info">
+                    <h4>@s.Name</h4>
+                    <p>@s.Floor.Name  mərtəbə</p>
+                    <p>@s.Phone</p>
+                </div>
+            </div>
+        </a>
+    </div>
+}
+

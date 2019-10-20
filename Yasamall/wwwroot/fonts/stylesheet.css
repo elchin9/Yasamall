@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Anabelle Script';
+    src: url('AnabelleScript.woff2') format('woff2'),
+        url('AnabelleScript.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Aracne';
+    src: url('Aracne-CondensedRegular.woff2') format('woff2'),
+        url('Aracne-CondensedRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('BebasNeue-Thin.woff2') format('woff2'),
+        url('BebasNeue-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bananito Symbols';
+    src: url('Bananito-Symbols.woff2') format('woff2'),
+        url('Bananito-Symbols.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue Book';
+    src: url('BebasNeueBook.woff2') format('woff2'),
+        url('BebasNeueBook.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bananito';
+    src: url('Bananito-Display.woff2') format('woff2'),
+        url('Bananito-Display.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('BebasNeueLight.woff2') format('woff2'),
+        url('BebasNeueLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('BebasNeue-Bold.woff2') format('woff2'),
+        url('BebasNeue-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+

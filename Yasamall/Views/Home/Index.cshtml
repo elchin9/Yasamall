@@ -1,0 +1,145 @@
+﻿
+@{
+    @model HomePageViewModel
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<section id="parallax-one" style="background: url(../img/@Model.Image.PhotoURLOne);background-attachment: fixed; background-repeat: no-repeat;background-size: cover; background-position-x: right;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-6">
+                <div class="main-info">
+                    <h4 data-aos="fade-right">Keyfiyyətli Shopping üçün</h4>
+                    <p data-aos="fade-right">Yasamall</p>
+                    <div class="main-img" data-aos="fade-left">
+                        <img src="img/3.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="parallax-two" style=" background: url(../img/@Model.Image.PhotoURLTwo);background-attachment: fixed; background-repeat: no-repeat;background-size: cover; background-position-x: right;"></section>
+<section id="parallax-three" style="background: url(../img/@Model.Image.PhotoURLThree);background-attachment: fixed; background-repeat: no-repeat;background-size: cover; background-position-x: right;"></section>
+<section id="parallax-four" style="background: url(../img/@Model.Image.PhotoURLFour);background-attachment: fixed; background-repeat: no-repeat;background-size: cover; background-position-x: right;"></section>
+<section id="parallax-five" style="background: url(../img/@Model.Image.PhotoURLFive);background-attachment: fixed; background-repeat: no-repeat;background-size: cover; background-position-x: right;"></section>
+
+<!-- Start NewModel Section -->
+@if (Model.NewProducts.Count() > 0)
+{
+    <section id="new-model">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="heading-section d-flex justify-content-between align-items-center">
+                        <h2>Yeni</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                @foreach (var n in Model.NewProducts)
+                {
+                    @if (n.Product.Brands.CategoryId == 1)
+                    {
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4" data-aos="fade-up">
+                            <div class="card-image">
+                                <div class="front">
+                                    <img src="img/@n.Product.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                </div>
+                                <div class="back">
+                                    <div class="back-content middle text-center">
+                                        <h4>@n.Product.Brands.Name</h4>
+                                        <p>@n.Product.Name</p>
+                                        <a asp-controller="Shop" asp-action="Products" asp-route-id="@n.Id">Ətraflı</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    if (n.Product.Brands.CategoryId == 2)
+                    {
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4" data-aos="fade-up">
+                            <div class="card-image">
+                                <div class="front">
+                                    <img src="img/@n.Product.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                </div>
+                                <div class="back">
+                                    <div class="back-content middle text-center">
+                                        <h4>@n.Product.Brands.Name</h4>
+                                        <p>@n.Product.Name</p>
+                                        <a asp-controller="Restaurant" asp-action="RestaurantDetails" asp-route-id="@n.Id">Ətraflı</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    if (n.Product.Brands.CategoryId == 3)
+                    {
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4" data-aos="fade-up">
+                            <div class="card-image">
+                                <div class="front">
+                                    <img src="img/@n.Product.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                </div>
+                                <div class="back">
+                                    <div class="back-content middle text-center">
+                                        <h4>@n.Product.Brands.Name</h4>
+                                        <p>@n.Product.Name</p>
+                                        <a asp-controller="Entertainment" asp-action="Product" asp-route-id="@n.Id">Ətraflı</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+}
+
+
+<!-- End NewModel Section -->
+<!-- Start News Section -->
+
+@if (Model.News.Count() > 0)
+{
+    <section id="news">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="heading-section d-flex justify-content-between align-items-center">
+                        <h2>Son Xəbərlər :</h2>
+                        <div class="btn-more">
+                            <a asp-controller="News" asp-action="Index">Daha Çox</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                @foreach (var n in Model.News)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+                        <a asp-controller="News" asp-action="Details" asp-route-id="@n.Id">
+                            <div class="last-content">
+                                <div class="last-images">
+                                    <img src="~/img/@n.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                    <div class="img-info">
+                                        <p>@n.Brand.Name</p>
+                                    </div>
+                                </div>
+                                <div class="last-info">
+                                    <h4>@n.Title</h4>
+                                    <span>@String.Format("{0:yyyy-MM-dd}", n.Time)</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+
+<!-- End News Section -->

@@ -1,0 +1,35 @@
+﻿
+@{
+    @model ProTags
+    Layout = null;
+}
+
+@foreach (var b in Model.Products)
+{
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+        <a asp-action="Product" asp-route-id="@b.Id">
+            <div class="product-cinema-content">
+                @if (Model.Brand.IsFilm)
+                {
+                    <div class="product-cinema-head d-flex justify-content-between align-items-center">
+                        <h5>@b.Hall.Name</h5>
+                    </div>
+                }
+                <div class="product-cinema-image">
+                    <img src="~/img/@b.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                </div>
+                <div class="product-cinema-info">
+                    <h5>@b.Name</h5>
+                    <p>$@b.Price</p>
+                </div>
+                @if (User.Identity.Name == Model.User.UserName)
+                {
+                    <div class="edit-products-admin">
+                        <a asp-controller="Entertainment" asp-action="ProductEdit" asp-route-id="@b.Id" title="Dəyiş"><i class="fal fa-edit edit-product-icon"></i></a>
+                        <a asp-controller="Entertainment" asp-action="Delete" asp-route-id="@b.Id" title="Sil"><i class="fal fa-trash delete-product-icon"></i></a>
+                    </div>
+                }
+            </div>
+        </a>
+    </div>
+}

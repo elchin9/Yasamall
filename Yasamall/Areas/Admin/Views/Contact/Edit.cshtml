@@ -1,0 +1,82 @@
+﻿
+@{
+    @model StaticData
+    ViewData["Title"] = "Edit";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Dəyişiklik et</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-2"></div>
+                    <div class="col-12 col-md-8">
+                        <form method="post" class="mt-4" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="Phone">Ev telefonu</label>
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Mobile">Mobil nömrə</label>
+                                <input asp-for="Mobile" class="form-control" />
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Map">Xəritədə üzərində ünvan</label>
+                                <input asp-for="Map" class="form-control" />
+                                <span asp-validation-for="Map" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FacebookLink">Facebook ünvanı</label>
+                                <input asp-for="FacebookLink" class="form-control" />
+                                <span asp-validation-for="FacebookLink" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="InstagramLink">İnstagram ünvanı</label>
+                                <input asp-for="InstagramLink" class="form-control" />
+                                <span asp-validation-for="InstagramLink" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TwitterLink">Twitter ünvanı</label>
+                                <input asp-for="TwitterLink" class="form-control" />
+                                <span asp-validation-for="TwitterLink" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="YoutubeLink">Youtube ünvanı</label>
+                                <input asp-for="YoutubeLink" class="form-control" />
+                                <span asp-validation-for="YoutubeLink" class="text-danger"></span>
+                            </div>
+
+                            <input type="submit" class="btn-create" value="Dəyiş" />
+                            <a style="padding:10px 20px; background: #830808; color:white; margin-top: 30px;border-radius:20px; text-align:center;" asp-controller="Tags" asp-action="Index">Geri Qayıt</a>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

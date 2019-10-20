@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="mt-3">Ad / Soyad : @Model.Firstname  @Model.Lastname</h3>
+                        <h5 class="mt-3">Email : @Model.Email </h5>
+                        <h5 class="mt-3">Mesaj : 
+                            <p class="mt-3">@Model.TextBody</p> 
+                        </h5>
+                        <p class="mt-3">Göndərildiyi vaxt : @String.Format("{0:yyyy-MM-dd}", Model.Time) </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a class="btn btn-primary mt-5 " asp-action="Index">Back To Home Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

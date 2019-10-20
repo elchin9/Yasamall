@@ -1,0 +1,38 @@
+﻿
+@{
+    @model StaticData
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Əlaqə məlumatları</h3>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 staticDataAdmin">
+                        <p>Mobil : <span>@Model.Mobile</span></p>
+                        <p>Ev : <span>@Model.Phone</span></p>
+                        <p>Facebook : <span>@Model.FacebookLink</span></p>
+                        <p>Instagram : <span>@Model.InstagramLink</span></p>
+                        <p>Twitter : <span>@Model.TwitterLink</span></p>
+                        <p>Youtube : <span>@Model.YoutubeLink</span></p>
+                        <p>Email : <span>@Model.Email</span></p>
+                        <p>Xəritədəki ünvan : 
+                            <iframe class="mt-2" src="@Model.Map"
+                                    width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </p>
+                    </div>
+                    <div class="col-12 text-center mt-5 btnEditStatic">
+                        <a asp-controller="Contact" asp-action="Edit" asp-route-id="@Model.Id"> Dəyişdir </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+﻿
+@{
+    @model IEnumerable<Brands>
+    Layout = null;
+}
+
+@foreach (var s in Model)
+{
+    @if (s.CategoryId == 1)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+            <a asp-controller="Shop" asp-action="ShopDetails" asp-route-id="@s.Id">
+                <div class="store-content">
+                    <div class="content-image">
+                        <img src="img/@s.PhotoURL" alt="">
+                    </div>
+                    <div class="content-info">
+                        <h4>@s.Name</h4>
+                        <p>@s.Floor.Name mərtəbə</p>
+                        <p>@s.Phone</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+    @if (s.CategoryId == 2)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+            <a asp-controller="Restaurant" asp-action="RestaurantDetails" asp-route-id="@s.Id">
+                <div class="restaurant-content">
+                    <div class="content-image">
+                        <img src="img/@s.PhotoURL" alt="">
+                    </div>
+                    <div class="content-info">
+                        <h4>@s.Name</h4>
+                        <p>@s.Floor.Name  mərtəbə</p>
+                        <p>@s.Phone</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+    @if (s.CategoryId == 3)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+            <a asp-controller="Entertainment" asp-action="Details" asp-route-id="@s.Id">
+                <div class="store-content">
+                    <div class="content-image">
+                        <img src="img/@s.PhotoURL" alt="">
+                    </div>
+                    <div class="content-info">
+                        <h4>@s.Name</h4>
+                        <p>@s.Floor.Name  mərtəbə</p>
+                        <p>@s.Phone</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+}

@@ -1,0 +1,64 @@
+﻿
+@{
+    @model BrandViewModel
+    ViewData["Title"] = "Əyləncə";
+}
+
+
+
+
+<!-- Start Main-İmage Section -->
+
+<input type="hidden" id="entertainmentCount" value="@ViewBag.TotalCount" />
+<input type="hidden" id="entertainmentCategoryId" value="@ViewBag.CategoryId" />
+
+
+<section id="main-image-entertainment">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="heading-main-image">
+                    <h4>Əyləncə</h4>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <div class="form-group">
+                    <label for="category">Kateqoriya üzrə axtarış</label>
+                    <select id="category" class="entertainmentCategory">
+                        <option value="0">Hamısı</option>
+                        @foreach (var t in Model.Tags)
+                        {
+                            <option value="@t.Id">@t.Name</option>
+                        }
+                    </select>
+                    <i class="fad fa-angle-double-down"></i>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+        </div>
+    </div>
+</section>
+
+<!-- End Main İmage Section -->
+<!-- Start Store Section -->
+
+<section id="entertainment">
+    <div class="container">
+        <div class="row entertainmentRow">
+            <partial name="_EntertainmentPartialView" model="Model.Brands" />
+        </div>
+        @if (ViewBag.TotalCount > 8)
+        {
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="btn-more btn-entertainment">
+                        <a href="#">Daha Çox</a>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+</section>
+
+<!-- End Store Section -->

@@ -1,0 +1,20 @@
+﻿
+@{
+    @model StaticData
+    Layout = null;
+}
+
+<div class="phone">
+    <p>Telefon: @Model.Phone</p>
+    <p>Mobil: @Model.Mobile</p>
+</div>
+<div class="email">
+    <p>Email: @Model.Email</p>
+</div>
+<div class="heading-form">
+    <h4>Ünvan :</h4>
+</div>
+<div class="map">
+    <iframe src="@Model.Map"
+            width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>

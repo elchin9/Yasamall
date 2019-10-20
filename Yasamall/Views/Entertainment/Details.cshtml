@@ -1,0 +1,121 @@
+﻿
+@{
+    @model ProTags
+    ViewData["Title"] = "Details";
+}
+
+
+<!-- Start Cover Section -->
+<input type="hidden" id="entertainmentProductCount" value="@ViewBag.TotalCount" />
+
+<section id="cover-image-cinema"
+         style="background-repeat:no-repeat; background-attachment: fixed; background-size:cover;">
+    <div class="overlay-main-image"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="store-property">
+                    <input type="hidden" name="name" id="entertainmentBrandId" value="@Model.Brand.Id" />
+                    <input type="hidden" name="name" id="entertainmentUserId" value="@Model.User.Id" />
+
+                    <h4>@Model.Brand.Name</h4>
+                    <p>@Model.Brand.Floor.Name mərtəbə</p>
+                    <p>@Model.Brand.Phone</p>
+                    <div class="website">
+                        <a href="@Model.Brand.Website">@Model.Brand.Website</a>
+                    </div>
+                    <ul class="objectSocial d-flex">
+                        <li>
+                            <a href="@Model.Brand.FacebookLink">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Model.Brand.InstagramLink">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @if (User.Identity.Name == Model.User.UserName)
+            {
+                <div class="col-12 col-md-6">
+                    <div class="edit-pages mt-5 mt-md-0 d-flex justify-content-center justify-content-md-end flex-wrap">
+                        <a asp-action="Edit" asp-route-id="@Model.Brand.Id"><i class="fal fa-edit"></i>Düzəliş et</a>
+                        @if (!Model.Brand.IsOnePage)
+                        {
+                            <a asp-action="CreateProduct" asp-route-id="@Model.Brand.Id"><i class="fal fa-shopping-bag"></i> Məhsul artır</a>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="profile-photo">
+        <img src="~/img/@Model.Brand.PhotoURL" alt="">
+    </div>
+</section>
+
+<!-- End Cover Section -->
+<!-- Start Product Section -->
+
+<section id="products-cinema">
+    <div class="container">
+        <div class="row ">
+            <div class="col-12">
+                <div class="store-tags d-flex flex-wrap">
+                    @foreach (var t in Model.BrandTags)
+                    {
+                        <div class="tag-content">
+                            <p>@t.Tag.Name</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (!Model.Brand.IsOnePage)
+        {
+            @if (Model.Brand.Products.Count() > 0)
+            {
+                <div class="row productRow mt-5">
+                    <partial name="_EntertainmentProductsPartialView" model="Model" />
+                </div>
+                @if (ViewBag.TotalCount > 8)
+                {
+                    <div class="row mt-5">
+                        <div class="col-12 text-center">
+                            <div class="btn-more btn-entertainment-product">
+                                <a href="#">Daha Çox</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <p class="notFound">Brandin məhsulu yoxdur.</p>
+                </div>
+            }
+
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="enter-images mt-5">
+                        <img src="~/img/@Model.Brand.OnePagePhotoURL" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="enter-texts mt-5">
+                        <p>@Model.Brand.OnePageInfo</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- End Product Section -->

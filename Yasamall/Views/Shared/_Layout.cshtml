@@ -1,0 +1,159 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca|Lexend+Mega&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+
+    <div class="loader-wrapper">
+        <img src="~/img/loader.gif" alt="">
+    </div>
+
+    <!-- End PreLoader -->
+    <!-- Start Header -->
+
+    <header>
+        <div class="container">
+            <div class="header-wrapper d-flex align-items-center justify-content-between">
+                <a asp-controller="Home" asp-action="Index">
+                    <div class="logo d-flex align-items-center">
+                        <img src="~/img/logo.png" alt="">
+                        <p>asamall</p>
+                    </div>
+                </a>
+                <div class="menu">
+                    <ul class="d-flex align-items-center">
+                        <li>
+                            <a class="@((ViewBag.Active == "Shop") ? "active-navbar" :  " " )" asp-controller="Shop" asp-action="Index">Mağazalar</a>
+                        </li>
+                        <li>
+                            <a class="@((ViewBag.Active == "Restaurant") ? "active-navbar" :  " " )" asp-controller="Restaurant" asp-action="Index">Restoranlar</a>
+                        </li>
+                        <li>
+                            <a class="@((ViewBag.Active == "Entertainment") ? "active-navbar" :  " " )" asp-controller="Entertainment" asp-action="Index">Əyləncə</a>
+                        </li>
+                        <li>
+                            <a class="@((ViewBag.Active == "News") ? "active-navbar" :  " " )" asp-controller="News" asp-action="Index">Xəbərlər</a>
+                        </li>
+                        <li>
+                            <a class="@((ViewBag.Active == "Contact") ? "active-navbar" :  " " )" asp-controller="Home" asp-action="Contact">Əlaqə</a>
+                        </li>
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="myProfile">
+                            <a asp-controller="Account" asp-action="MyProfile" title="Profilim">
+                                <i class="fal fa-user-circle"></i>
+                            </a>
+                        </div>
+                        <div class="logout-button">
+                            <a asp-controller="Account" asp-action="Logout" title="Çıxış">
+                                <i class="fal fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="login-button" asp-controller="Account" asp-action="Login" title="Giriş">
+                            <i class="fal fa-user-circle"></i>
+                            Login
+                        </a>
+                    }
+                </div>
+                <div class="menu-icon">
+                    <i class="far fa-bars"></i>
+                </div>
+            </div>
+        </div>
+        <div class="nav-mobile">
+            <div class="menu-mobile">
+                <ul class="text-center">
+                    <li>
+                        <a asp-controller="Shop" asp-action="Index">Mağazalar</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Restaurant" asp-action="Index">Restoranlar</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Entertainment" asp-action="Index">Əyləncə</a>
+                    </li>
+                    <li>
+                        <a asp-controller="News" asp-action="Index">Xəbərlər</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="Contact">Əlaqə</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- End Header -->
+    @RenderBody()
+    <!-- Start Contact Section -->
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="heading-contact">
+                        <h2>Bizi izləyin</h2>
+                    </div>
+                </div>
+            </div>
+            @await Component.InvokeAsync("Social")
+        </div>
+    </section>
+
+    <!-- End Contact Section -->
+    <!-- Start Footer -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <div class="footer-text">
+                        <p>© All rights reserved.</p>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="goTop">
+                        <i class="fas fa-long-arrow-alt-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- End Footer -->
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <script src="~/js/icons.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/js/main.js" charset="UTF-8"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

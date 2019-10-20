@@ -1,0 +1,68 @@
+﻿
+@{
+    @model News
+
+    ViewData["Title"] = "Contact";
+}
+
+
+<!-- Start Contact Section -->
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Xəbər Yarat</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <form method="post" class="mt-4" enctype="multipart/form-data">
+
+                          
+                            <div class="form-group">
+                                <label asp-for="BrandsId">Kateqoriya</label>
+                                <select asp-for="BrandsId" asp-items="@(new SelectList(ViewBag.Brand,"Id","Name"))" style="width:100%; padding: 10px;"></select>
+                                <span asp-validation-for="BrandsId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Title">Xəbər Başlığı</label>
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ShortInfo">Qısa Məlumat</label>
+                                <input asp-for="ShortInfo" class="form-control" />
+                                <span asp-validation-for="ShortInfo" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MainInfo">Xəbərin mətni</label>
+                                <textarea asp-for="MainInfo" style="width:100%;" rows="6"></textarea>
+                                <span asp-validation-for="MainInfo" class="text-danger"></span>
+                            </div>
+
+
+                            <input type="submit" class="btn-create" value="Dəyiş" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- End Contact Section -->
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

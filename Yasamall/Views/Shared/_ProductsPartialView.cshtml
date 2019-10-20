@@ -1,0 +1,29 @@
+﻿
+@{
+    @model ProTags
+    Layout = null;
+}
+
+@foreach (var p in Model.Products)
+{
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" data-aos="zoom-in">
+        <a asp-controller="Shop" asp-action="Products" asp-route-id="@p.Id">
+            <div class="product-shop-content">
+                    <div class="product-shop-image">
+                        <img src="~/img/@p.Photos.FirstOrDefault(pr => pr.IsMain == true).PhotoURL" alt="">
+                    </div>
+                <div class="product-shop-info">
+                    <h5>@p.Name</h5>
+                    <p>$@p.Price</p>
+                </div>
+                @if (User.Identity.Name == Model.User.UserName)
+                {
+                    <div class="edit-products-admin">
+                        <a asp-controller="Shop" asp-action="ProductEdit" asp-route-id="@p.Id" title="Dəyiş"><i class="fal fa-edit edit-product-icon"></i></a>
+                        <a asp-controller="Shop" asp-action="Delete" asp-route-id="@p.Id" title="Sil"><i class="fal fa-trash delete-product-icon"></i></a>
+                    </div>
+                }
+            </div>
+        </a>
+    </div>
+}

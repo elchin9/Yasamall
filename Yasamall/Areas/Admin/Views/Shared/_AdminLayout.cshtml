@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <!-- Title Page-->
+    <title>Dashboard</title>
+    <!-- Fontfaces CSS-->
+    <link href="~/admin/css/font-face.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="~/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <!-- Vendor CSS-->
+    <link href="~/admin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="~/admin/css/theme.css" rel="stylesheet" media="all">
+    <link href="~/css/style.css" rel="stylesheet" media="all">
+</head>
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a asp-controller="Dashboard" asp-action="Index">
+                            <div class="logo d-flex align-items-center justify-content-center">
+                                <img src="~/img/logo.png" alt="">
+                                <p>asamall</p>
+                            </div>
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="active has-sub">
+                            <a class="js-arrow" asp-controller="Dashboard" asp-action="Index">
+                                <i class="fal fa-home"></i>Əsas Səhifə
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="Dashboard" asp-action="Website">
+                                <i class="fal fa-browser"></i>Sayt
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <a asp-controller="Dashboard" asp-action="Index">
+                <div class="logo d-flex align-items-center justify-content-center">
+                    <img src="~/img/logo.png" alt="">
+                    <p>asamall</p>
+                </div>
+            </a>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="@((ViewBag.Active == "Home") ? "activeAdminNavbar" :  " " ) has-sub has-sub-admin">
+                            <a class="js-arrow" asp-controller="Dashboard" asp-action="Index">
+                                <i class="fal fa-home"></i>Əsas Səhifə
+                            </a>
+                        </li>
+                        <li class="@((ViewBag.Active == "Site") ? "activeAdminNavbar" :  " " ) has-sub-admin">
+                            <a asp-controller="Dashboard" asp-action="Website">
+                                <i class="fal fa-browser"></i>Sayt
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="logout-admin-panel">
+                        <a asp-controller="Account" asp-action="Login">
+                            <i class="fal fa-sign-out"></i>
+                            Logout
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+    </div>
+    <!-- END MENU SIDEBAR-->
+   
+
+    @RenderBody()
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <script src="~/js/icons.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/js/main.js" charset="UTF-8"></script>
+    <!-- Jquery JS-->
+    <script src="~/admin/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="~/admin/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="~/admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="~/admin/vendor/slick/slick.min.js"></script>
+    <script src="~/admin/vendor/wow/wow.min.js"></script>
+    <script src="~/admin/vendor/animsition/animsition.min.js"></script>
+    <script src="~/admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="~/admin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/admin/vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="~/admin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="~/admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/admin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/admin/vendor/select2/select2.min.js"></script>
+    <!-- Main JS-->
+
+    <script src="~/admin/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<!-- end document-->

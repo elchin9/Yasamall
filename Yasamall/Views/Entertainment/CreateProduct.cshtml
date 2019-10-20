@@ -1,0 +1,66 @@
+﻿
+@{
+    @model Products
+    ViewData["Title"] = "CreateProduct";
+}
+
+<div class="container pb-5 pt-5" >
+    <div class="row mt-3">
+        <div class="col-12 col-md-2"></div>
+        <div class="col-12 col-md-8">
+            <form method="post" class="mt-4" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="AllPhotos">Məhsulun Şəklini seçin</label>
+                    <div class="uploadArea">
+                        <div class="uploadImage d-flex justify-content-center align-items-center">
+                            <i class="fal fa-cloud-upload"></i>
+                        </div>
+                    </div>
+                    <input id="uploadInput" asp-for="AllPhotos" accept="image/*" class="form-control" />
+                    <span asp-validation-for="AllPhotos" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Name">Ad</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BrandsId">Kateqoriya</label>
+                    <select asp-for="BrandsId" asp-items="@(new SelectList(ViewBag.Brand,"Id","Name"))" style="width:100%; padding: 10px;"></select>
+                    <span asp-validation-for="BrandsId" class="text-danger"></span>
+                </div>
+
+                @if (ViewBag.Film == true)
+                {
+                    <div class="form-group">
+                        <label asp-for="HallsId">Zallar</label>
+                        <select asp-for="HallsId" asp-items="@(new SelectList(ViewBag.Hall,"Id","Name"))" style="width:100%; padding: 10px;"></select>
+                        <span asp-validation-for="HallsId" class="text-danger"></span>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Info">Haqqında</label>
+                    <input asp-for="Info" class="form-control" />
+                    <span asp-validation-for="Info" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price">Qiymət</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <input type="submit" class="btn-create" value="Yarat" />
+            </form>
+        </div>
+        <div class="col-12 col-md-2"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

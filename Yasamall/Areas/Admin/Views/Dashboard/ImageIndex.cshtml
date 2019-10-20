@@ -1,0 +1,53 @@
+﻿
+
+@{
+    @model BackgroundImages
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Arxa Fon şəkilləri</h3>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 staticDataAdmin">
+                        <div class="images-admin-panel">
+                            <h5>Birinci şəkil üçün</h5>
+                            <img src="~/img/@Model.PhotoURLOne" />
+                        </div>
+                        <div class="images-admin-panel">
+                            <h5>İkinci şəkil üçün</"></h5>
+
+                            <img src="~/img/@Model.PhotoURLTwo" />
+                        </div>
+                        <div class="images-admin-panel">
+                            <h5>Üçüncü şəkil üçün</h5>
+
+                            <img src="~/img/@Model.PhotoURLThree" />
+                        </div>
+                        <div class="images-admin-panel">
+                            <h5>Dördüncü şəkil üçün</h5>
+
+                            <img src="~/img/@Model.PhotoURLFour" />
+                        </div>
+                        <div class="images-admin-panel">
+                            <h5>Beşinci şəkil üçün</h5>
+
+                            <img src="~/img/@Model.PhotoURLFive" />
+                        </div>
+                    </div>
+                    <div class="col-12 text-center mt-5 btnEditStatic">
+                        <a asp-controller="Dashboard" asp-action="Edit" asp-route-id="@Model.Id"> Dəyişdir </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

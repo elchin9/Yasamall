@@ -1,0 +1,73 @@
+﻿
+@{
+    @model ProductsViewModel
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <section id="oneProduct">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-lg-1">
+                                <div class="product-slider-images">
+                                    <ul class="d-flex d-lg-block">
+                                        @foreach (var p in Model.Product.Photos)
+                                        {
+                                            if (p.Id == 1)
+                                            {
+                                                <li class="hover-slider-active"><img src="~/img/@p.PhotoURL" alt=""></li>
+
+                                            }
+                                            else
+                                            {
+                                                <li><img src="~/img/@p.PhotoURL" alt=""></li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="one-image">
+                                    <img src="~/img/@Model.Product.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" alt="">
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-5">
+                                <div class="main-product-info">
+                                    <h4>@Model.Product.Brands.Name - @Model.Product.Name</h4>
+                                    <p>
+                                        @Model.Product.Info
+                                    </p>
+                                </div>
+                                <div class="main-product-color">
+                                    <p>Rənglər :</p>
+                                    <div class="colors d-flex flex-wrap">
+                                        @foreach (var c in Model.ProColors)
+                                        {
+                                            <div class="@c.Color.ColorCode color-all"></div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="main-product-size">
+                                    <p>Ölçü :</p>
+                                    <div class="sizes d-flex flex-wrap">
+                                        @foreach (var s in Model.ProSizes)
+                                        {
+                                            <div class="size-all">@s.Size.Size</div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="main-product-price">
+                                    <span>@Model.Product.Price</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

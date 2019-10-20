@@ -1,0 +1,59 @@
+﻿@{
+    @model BrandViewModel
+}
+
+
+<!-- Start Main-İmage Section -->
+
+<input type="hidden" id="shopDetails" value="@ViewBag.TotalCount" />
+<input type="hidden" id="categoryId" value="@ViewBag.CategoryId" />
+
+<section id="main-image">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="heading-main-image">
+                    <h4>Mağazalar</h4>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <div class="form-group">
+                    <label for="category">Kateqoriya üzrə axtarış</label>
+                    <select id="category">
+                        <option value="0">Hamısı</option>
+                        @foreach (var t in Model.Tags)
+                        {
+                            <option value="@t.Id">@t.Name</option>
+                        }
+                    </select>
+                    <i class="fad fa-angle-double-down"></i>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+        </div>
+    </div>
+</section>
+
+<!-- End Main İmage Section -->
+<!-- Start Store Section -->
+
+<section id="stores">
+    <div class="container">
+        <div class="row shopRow">
+            <partial name="_ShopPartialView" model="Model.Brands" />
+        </div>
+        @if (ViewBag.TotalCount > 8)
+        {
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="btn-more btn-shop">
+                        <a href="#" id="load_more">Daha Çox</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- End Store Section -->

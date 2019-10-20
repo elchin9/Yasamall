@@ -1,0 +1,61 @@
+﻿
+@{
+    @model IEnumerable<News>
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-container">
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3>Xəbərlər</h3>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <h5>Toplam Xəbər sayı : @Model.Count()</h5>
+                    </div>
+                </div>
+                <div class="row mt-5" style="margin: 30px 0;">
+                    <div class="col-12">
+                        <a asp-action="Create" class="btn btn-primary btn-block">
+                            <i class="fas fa-plus"></i> Yeni Xəbər Yarat
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Şəkil</th>
+                        <th>Başlıq</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model)
+                    {
+                    <tr>
+                        <td>
+
+                               <img style="width: 150px;" src="~/img/@b.Photos.FirstOrDefault(p => p.IsMain == true).PhotoURL" class="img-thumbnail" />
+
+                        </td>
+                        <td>
+                            <p>@b.Title</p>
+                        </td>                   
+                        <td style="vertical-align: middle; text-align: center; color:white;">
+                            <a title="Ətraflı bax" asp-action="Details" asp-route-id="@b.Id" class="btn btn-success mt-1"><i class="fal fa-info"></i></a>
+                            <a title="Dəyişdir" asp-action="Edit" asp-route-id="@b.Id" class="btn btn-warning mt-1"><i class="fal fa-edit"></i></a>
+                            <a title="Sil" asp-action="Delete" asp-route-id="@b.Id" class="btn btn-danger mt-1"><i class="fal fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,101 @@
+﻿
+@{
+    @model ProTags
+    ViewData["Title"] = "RestaurantDetails";
+}
+
+
+
+<!-- Start Cover Section -->
+
+<input type="hidden" id="restaurantProductsDetails" value="@ViewBag.TotalCount" />
+
+<section id="cover-image-restaurant"
+         style="background-attachment: fixed; background-size:cover;">
+    <div class="overlay-main-image"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="store-property">
+                    <input type="hidden" name="name" id="restaurantBrandId" value="@Model.Brand.Id" />
+                    <input type="hidden" name="name" id="restaurantUserId" value="@Model.User.Id" />
+
+                    <h4>@Model.Brand.Name</h4>
+                    <p>@Model.Brand.Floor.Name mərtəbə</p>
+                    <p>@Model.Brand.Phone</p>
+                    <div class="website">
+                        <a href="@Model.Brand.Website">@Model.Brand.Website</a>
+                    </div>
+                    <ul class="objectSocial d-flex">
+                        <li>
+                            <a href="@Model.Brand.FacebookLink">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Model.Brand.InstagramLink">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @if (User.Identity.Name == Model.User.UserName)
+            {
+                <div class="col-12 col-md-6">
+                    <div class="edit-pages mt-5 mt-md-0 d-flex justify-content-center justify-content-md-end flex-wrap">
+                        <a asp-action="Edit" asp-route-id="@Model.Brand.Id"><i class="fal fa-edit"></i>Düzəliş et</a>
+                        <a asp-action="CreateProduct" asp-route-id="@Model.Brand.Id"><i class="fal fa-shopping-bag"></i> Məhsul artır</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="profile-photo">
+        <img src="~/img/@Model.Brand.PhotoURL" alt="">
+    </div>
+</section>
+
+<!-- End Cover Section -->
+<!-- Start Product Section -->
+
+<section id="products-restaurant">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="store-tags d-flex flex-wrap">
+                    @foreach (var t in Model.BrandTags)
+                    {
+                        <div class="tag-content">
+                            <p>@t.Tag.Name</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (Model.Brand.Products.Count() > 0)
+        {
+            <div class="row productRow mt-5">
+                <partial name="_RestaurantProductsPartialView" model="Model" />
+            </div>
+            @if (ViewBag.TotalCount > 8)
+            {
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <div class="btn-more btn-product-restaurant">
+                            <a href="#">Daha Çox</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="notFound">Brandin məhsulu yoxdur.</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- End Product Section -->
